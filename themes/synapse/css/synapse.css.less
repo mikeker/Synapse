@@ -1,0 +1,303 @@
+@import "../bootstrap/variables.less";
+@import "../bootstrap/mixins.less";
+
+// Debug
+#block-views-slideshow-block {
+  display: none;
+}
+
+/*
+ * Variables
+ */
+@halfSpace = (@baseLineHeight / 2);
+@wholeSpace = @baseLineHeight;
+
+/*
+ * Universal styling for all screen sizes
+ */
+body {
+  background-color: @bodyBackground;
+  padding: 0;
+}
+.region {
+  padding: @wholeSpace @halfSpace;
+  background-color: @white;
+}
+
+/* Inline images */
+.media-image-right {
+  margin: @halfSpace 0 @halfSpace @halfSpace;
+}
+.media-image-left {
+  margin: @halfSpace @halfSpace @halfSpace 0;
+}
+
+/* Front page */
+.front {
+  #main-container-inner {
+    #main-bottom {
+      h2 {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+      }
+      .front-page-pod {
+        background-color: @white;
+      }
+    }
+  }
+}
+
+/* Slideshow:
+ * @TODO: server side resizing of images for smaller screens */
+#block-views-slideshow-block {
+  margin: @wholeSpace 0 (2 * @wholeSpace) 0;
+  .slideshow-slide {
+    position: relative;
+    max-width: 700px;   // 9 grids wide
+    width: 90%;
+
+    .slideshow-slide-caption {
+      position: absolute;
+      top: @wholeSpace; right: @wholeSpace;
+      color: @white;
+      font-size: 24px;
+      line-height: 36px;
+      text-align: right;
+      text-shadow: black 0.1em 0.1em 0.2em
+    }
+  }
+}
+
+/* Nav bar */
+.navbar {
+  margin-top: @halfSpace ;
+  font-style: italic;
+  font-weight: 600;
+}
+#navigation-container {
+  margin: 0;
+  background-color: @blue;
+}
+.navbar {
+  margin: 0;
+}
+.navbar-inner {
+  // Overwrite Bootstrap default navbar styling
+  background: none;
+  .border-radius(0);
+  .box-shadow(0 0 0 rgba(0, 0, 0, 0));
+}
+
+#footer-container .region {
+  text-align: center;
+}
+
+/*
+ * Responsive specific items beginnging with the smallest devices
+ */
+@media (max-width: 480px) {
+  // Phones
+  body, body.front {
+    background-color: @white;
+
+    #container {
+      width: 100%;
+
+      #header-container {
+        background-color: @orange;
+      }
+      #block-views-slideshow-block {
+        .slideshow-slide {
+          .slideshow-slide-caption {
+            // Reduce caption size and spacing for smaller images
+            font-size: 20px;
+            line-height: 28px;
+            top: @halfSpace;
+            right: @halfSpace;
+          }
+        }
+      }
+      #main {
+        padding: @halfSpace;
+      }
+      #sidebar-second {
+        margin-top: @halfSpace;
+        padding-top: @halfSpace;
+        border-top: 1px solid @blue;
+      }
+      #footer-container {
+        border-top: @halfSpace solid @orange;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+
+  // Landscape phone to small desktop/portrait tablets
+  body.front .row > #main-container-inner > [class*="span"] {
+    // Because we added #main-container-inner, the .row > [class*="span"] from
+    // responsive.less no longer works for the front page, to replicate that here
+    float: none;
+    display: block;
+    width: auto;
+    margin: 0;
+  }
+
+  body {
+    #container {
+      width: 100%;
+    }
+    #header-container {
+      // No more header image, use <h1>title</h1>, hide site slogan
+      #header {
+        height: auto;
+        margin-bottom: @halfSpace;
+      }
+      #site-name {
+        text-align: center;
+      }
+    }
+
+    .navbar {
+      text-align: center;
+    }
+
+    #block-views-slideshow-block {
+      .slideshow-slide {
+        margin-right: 17px;
+
+        img {
+          width: 100%;
+          // padding-right: 20px;
+        }
+      }
+    }
+
+    #sidebar-second > .region {
+      margin: @halfspace 0;
+    }
+  }
+
+}
+@media (min-width: 768px) {
+  #container {
+    width: 100%;
+  }
+
+  // Anything this size or larger, add header images, gradients, etc.
+  #header-container {
+    #gradient > .vertical(@gradient-dark, @gradient-light);
+  }
+  #header-container .row {
+    background-image: url(../img/header_bg.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+    position: relative;   // Allows us to use absolute positioning without going
+                          // beyond the container
+  }
+  #header {
+    height: 177px;        // Height of header_bg.png
+  }
+  #site-slogan {
+    position: absolute;
+    right: 0;
+    top: 75px;
+    color: @white;
+    background-color: @orange;
+    padding: @wholeSpace @halfSpace;
+    font-size: @wholeSpace ;
+    line-height: (1.5 * @wholeSpace);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  // Small desktop or tabet -- anything up to regular desktop
+  body.front {
+    // Shrink front page to a 700px wide version of the site
+    #container, #footer  {  // Only two span12 containers
+      width: 700px;
+    }
+    // Remove dots
+    #main-container-inner {
+      background-image: none;
+      margin-bottom: 0;
+    }
+
+    // And push sidebar under ccontent
+    .row > #main-container-inner > [class*="span"] {
+      // Because we added #main-container-inner, the .row > [class*="span"] from
+      // responsive.less no longer works for the front page, to replicate that here
+      float: none;
+      display: block;
+      width: auto;
+      margin: 0;
+    }
+    #sidebar-second > .region {
+      margin: @wholeSpace 0;
+    }
+
+    // Clean up spacing
+    #block-views-slideshow-block {
+      margin-top: 0;
+    }
+  }
+
+
+
+}
+@media (min-width: 980px) {
+  #container {
+    width: 980px;
+  }
+
+  /* Main content */
+  #main-container {
+    #gradient > .vertical(@gradient-light, @gradient-dark);
+    padding-top: @wholeSpace;
+    padding-bottom: @wholeSpace;
+
+    #sidebar-second .region {
+      border: 1px solid @blue;
+    }
+  }
+
+  /* Front page */
+  .front {
+    #main-container-inner {
+      // Added extra "inner" div so that we can add a background image that
+      // goes outside the boundaries of the usual content area
+      margin-bottom: 50px;
+      background-image: url('../img/dot_bg.png');
+      background-position: 73px 15px;
+      background-repeat: no-repeat;
+
+      #main-bottom {
+        overflow: hidden;
+
+        h2 {
+          font-size: 18px;
+          line-height: 22px;
+          font-weight: 600;
+        }
+        .inner {
+          margin: (@halfSpace);
+        }
+        .front-page-pod {
+          margin-bottom: -999px;    // Equal height
+          padding-bottom: 999px;
+        }
+      }
+    }
+  }
+
+}
+
+
+
+// Fix:
+// Need to fix for responsive
+
+#block-search-form {
+  display: none;    // For now...
+}

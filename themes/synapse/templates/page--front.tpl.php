@@ -1,4 +1,4 @@
-<div id="container" class="clearfix container">
+<div id="container" class="clearfix container-fluid">
 
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
@@ -7,7 +7,7 @@
     <?php endif; ?>
   </div>
 
-  <div id="header-container"><div class="row"><header id="header" role="banner" class="clearfix span12">
+  <div id="header-container"><div class="row-fluid"><header id="header" role="banner" class="clearfix span12">
 	<?php if ($logo): ?>
       <a class="hidden-phone" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo">
         <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
@@ -28,7 +28,7 @@
 
     <?php print render($page['header']); ?>
   </header></div></div> <!-- /#header -->
-  <div id="navigation-container"><div class="row"><nav id="navigation" role="navigation" class="clearfix">
+  <div id="navigation-container"><div class="row-fluid"><nav id="navigation" role="navigation" class="clearfix">
     <div class="navbar"><div class="navbar-inner"><div class="container"> <?php // Needed for Bootstrap ?>
 		  <?php print theme('links__system_main_menu', array(
             'links' => $main_menu,
@@ -60,7 +60,7 @@
 
   <?php if ($breadcrumb): print $breadcrumb; endif;?>
 
-  <div id="main-container"><div class="row"><div id="main-container-inner" class="clearfix">
+  <div id="main-container"><div class="row-fluid"><div id="main-container-inner" class="clearfix">
     <section id="main" role="main" class="clearfix span9">
       <?php print $messages; ?>
       <a id="main-content"></a>
@@ -69,16 +69,15 @@
       <?php print render($page['help']); ?>
       <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
       <?php print render($page['content']); ?>
-      <?php // dsm(get_defined_vars()); ?>
       <?php if (!empty($page['main_bottom_left']) || !empty($page['main_bottom_middle']) || !empty($page['main_bottom_right'])) : ?>
-        <div id="main-bottom" class="row">
-          <div id="main-bottom-left" class="clearfix span3 front-page-pod"><div class="inner">
+        <div id="main-bottom" class="row-fluid">
+          <div id="main-bottom-left" class="clearfix span4 front-page-pod"><div class="inner">
             <?php if (!empty($page['main_bottom_left'])) { print render($page['main_bottom_left']); }?>
           </div></div>
-          <div id="main-bottom-middle" class="clearfix span3 front-page-pod"><div class="inner">
+          <div id="main-bottom-middle" class="clearfix span4 front-page-pod"><div class="inner">
             <?php if (!empty($page['main_bottom_middle'])) { print render($page['main_bottom_middle']); }?>
           </div></div>
-          <div id="main-bottom-right" class="clearfix span3 front-page-pod"><div class="inner">
+          <div id="main-bottom-right" class="clearfix span4 front-page-pod"><div class="inner">
             <?php if (!empty($page['main_bottom_right'])) { print render($page['main_bottom_right']); }?>
           </div></div>
         </div>
@@ -98,7 +97,7 @@
     <?php endif; ?>
   </div></div></div>
 
-  <div id="footer-container"><div class="row"><footer id="footer" role="contentinfo" class="clearfix span12">
+  <div id="footer-container"><div class="row-fluid"><footer id="footer" role="contentinfo" class="clearfix span12">
     <?php print render($page['footer']) ?>
     <?php print $feed_icons ?>
   </footer></div></div> <!-- /#footer -->

@@ -1,11 +1,6 @@
 @import "../bootstrap/variables.less";
 @import "../bootstrap/mixins.less";
 
-// Debug
-#block-views-slideshow-block {
-  display: none;
-}
-
 /*
  * Variables
  */
@@ -48,27 +43,6 @@ body {
   }
 }
 
-/* Slideshow:
- * @TODO: server side resizing of images for smaller screens */
-#block-views-slideshow-block {
-  margin: @wholeSpace 0 (2 * @wholeSpace) 0;
-  .slideshow-slide {
-    position: relative;
-    max-width: 700px;   // 9 grids wide
-    width: 90%;
-
-    .slideshow-slide-caption {
-      position: absolute;
-      top: @wholeSpace; right: @wholeSpace;
-      color: @white;
-      font-size: 24px;
-      line-height: 36px;
-      text-align: right;
-      text-shadow: black 0.1em 0.1em 0.2em
-    }
-  }
-}
-
 /* Nav bar */
 .navbar {
   margin-top: @halfSpace ;
@@ -89,6 +63,7 @@ body {
   .box-shadow(0 0 0 rgba(0, 0, 0, 0));
 }
 
+/* Footer */
 #footer-container .region {
   text-align: center;
 }
@@ -96,16 +71,30 @@ body {
 /*
  * Responsive specific items beginnging with the smallest devices
  */
-@media (max-width: 480px) {
-  // Phones
+@media (max-width: 767px) {
+  // Phones portrait/landscape
+  body.front .row-fluid > #main-container-inner > [class*="span"] {
+    // Because we added #main-container-inner, the .row-fluid > [class*="span"] from
+    // responsive.less no longer works for the front page, to replicate that here
+    float: none;
+    display: block;
+    width: auto;
+    margin: 0;
+  }
+
   body, body.front {
     background-color: @white;
 
     #container {
       width: 100%;
+      padding-left: 0;
+      padding-right: 0;
 
       #header-container {
         background-color: @orange;
+        padding-top: @halfSpace;
+        padding-bottom: @halfSpace;
+        text-align: center;
       }
       #block-views-slideshow-block {
         .slideshow-slide {
@@ -131,124 +120,61 @@ body {
       }
     }
   }
-}
-@media (max-width: 767px) {
 
-  // Landscape phone to small desktop/portrait tablets
-  body.front .row > #main-container-inner > [class*="span"] {
-    // Because we added #main-container-inner, the .row > [class*="span"] from
-    // responsive.less no longer works for the front page, to replicate that here
-    float: none;
-    display: block;
-    width: auto;
-    margin: 0;
+  // No slideshow on small screens
+  #block-views-slideshow-block {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  // Anything this size or larger, add header images, gradients, etc.
+  #container {
+    // Need the container to stretch full canvas so we can have full width
+    // background effects. Overrides bootstrap paddings
+    width: 100%;
+    padding: 0;
+
+    // But we still want a bit of padding long the sides so we add it to an
+    // element within each container element
+    #header-container > .row-fluid,
+    #navigation-container > .row-fluid,
+    #main-container > .row-fluid,
+    #footer-container > .row-fluid {
+      width: auto;
+      padding-left: @gridGutterWidth;
+      padding-right: @gridGutterWidth;
+    }
   }
 
-  body {
-    #container {
-      width: 100%;
-    }
-    #header-container {
-      // No more header image, use <h1>title</h1>, hide site slogan
+  #header-container {
+    #gradient > .vertical(@gradient-dark, @gradient-light);
+
+    .row-fluid {
+      background-image: url(../img/header_bg.png);
+      overflow: hidden;     // Prevent larger image from causing horizontal scrollbars
+      background-position: top right;
+      background-repeat: no-repeat;
+      position: relative;   // Allows us to use absolute positioning without going
+                            // beyond the container
       #header {
-        height: auto;
-        margin-bottom: @halfSpace;
-      }
-      #site-name {
-        text-align: center;
-      }
-    }
-
-    .navbar {
-      text-align: center;
-    }
-
-    #block-views-slideshow-block {
-      .slideshow-slide {
-        margin-right: 17px;
+        height: 177px;        // Height of header_bg.png
 
         img {
-          width: 100%;
-          // padding-right: 20px;
+          margin-top: @halfSpace;
+        }
+        #site-slogan {
+          position: absolute;
+          right: @gridGutterWidth;
+          top: 75px;
+          color: @white;
+          background-color: @orange;
+          padding: @wholeSpace @halfSpace;
+          font-size: @wholeSpace ;
+          line-height: (1.5 * @wholeSpace);
         }
       }
     }
-
-    #sidebar-second > .region {
-      margin: @halfspace 0;
-    }
-  }
-
-}
-@media (min-width: 768px) {
-  #container {
-    width: 100%;
-  }
-
-  // Anything this size or larger, add header images, gradients, etc.
-  #header-container {
-    #gradient > .vertical(@gradient-dark, @gradient-light);
-  }
-  #header-container .row {
-    background-image: url(../img/header_bg.png);
-    background-position: top right;
-    background-repeat: no-repeat;
-    position: relative;   // Allows us to use absolute positioning without going
-                          // beyond the container
-  }
-  #header {
-    height: 177px;        // Height of header_bg.png
-  }
-  #site-slogan {
-    position: absolute;
-    right: 0;
-    top: 75px;
-    color: @white;
-    background-color: @orange;
-    padding: @wholeSpace @halfSpace;
-    font-size: @wholeSpace ;
-    line-height: (1.5 * @wholeSpace);
-  }
-}
-
-@media (min-width: 768px) and (max-width: 979px) {
-  // Small desktop or tabet -- anything up to regular desktop
-  body.front {
-    // Shrink front page to a 700px wide version of the site
-    #container, #footer  {  // Only two span12 containers
-      width: 700px;
-    }
-    // Remove dots
-    #main-container-inner {
-      background-image: none;
-      margin-bottom: 0;
-    }
-
-    // And push sidebar under ccontent
-    .row > #main-container-inner > [class*="span"] {
-      // Because we added #main-container-inner, the .row > [class*="span"] from
-      // responsive.less no longer works for the front page, to replicate that here
-      float: none;
-      display: block;
-      width: auto;
-      margin: 0;
-    }
-    #sidebar-second > .region {
-      margin: @wholeSpace 0;
-    }
-
-    // Clean up spacing
-    #block-views-slideshow-block {
-      margin-top: 0;
-    }
-  }
-
-
-
-}
-@media (min-width: 980px) {
-  #container {
-    width: 980px;
   }
 
   /* Main content */
@@ -262,8 +188,98 @@ body {
     }
   }
 
+  #footer-container {
+    border-top: @wholeSpace solid @orange;
+
+    .region {
+      background-color: @gradient-dark;
+    }
+  }
+
+  body.front {
+    #main-container {
+      #main-bottom {
+        overflow: hidden;
+
+        .front-page-pod {
+          margin-bottom: -999px;    // Equal height
+          padding-bottom: 999px;
+        }
+        .inner {
+          margin: (@halfSpace);
+        }
+      }
+    }
+  }
+
+  /* Slideshow:
+   * @TODO: server side resizing of images for smaller screens
+   * @TODO: Unknown if the slideshow will be on any other pages than the front page */
+  #block-views-slideshow-block {
+    margin: 0 0 (3 * @wholeSpace) 0;
+    .slideshow-slide {
+      position: relative;
+      max-width: 700px;   // 9 grids wide
+
+      .slideshow-slide-caption {
+        position: absolute;
+        top: @wholeSpace; right: @wholeSpace;
+        color: @white;
+        font-size: 24px;
+        line-height: 36px;
+        text-align: right;
+        text-shadow: black 0.1em 0.1em 0.2em
+      }
+    }
+  }
+
+
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  // Rearrange front page display slightly for tablet and small desktop users
+  body.front {
+    // push sidebar under content
+    .row-fluid > #main-container-inner > [class*="span"] {
+      // Because we added #main-container-inner, the .row-fluid > [class*="span"] from
+      // responsive.less no longer works for the front page, to replicate that here
+      float: none;
+      display: block;
+      width: auto;
+      margin: 0;
+    }
+    #main-container {
+      #sidebar-second > .region {
+        margin: @wholeSpace 0;
+        border: 0;
+      }
+
+      // Clean up spacing
+      #block-views-slideshow-block {
+        margin: 0 auto @wholeSpace auto;
+        width: 700px;
+      }
+    }
+  }
+}
+
+@media (min-width: 980px) {
+  // Center content when wider than our grid
+  #container {
+    width: 100%;
+
+    #header-container > .row-fluid,
+    #navigation-container > .row-fluid,
+    #main-container > .row-fluid,
+    #footer-container > .row-fluid {
+      width: 960px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
   /* Front page */
-  .front {
+  body.front {
     #main-container-inner {
       // Added extra "inner" div so that we can add a background image that
       // goes outside the boundaries of the usual content area
@@ -271,32 +287,9 @@ body {
       background-image: url('../img/dot_bg.png');
       background-position: 73px 15px;
       background-repeat: no-repeat;
-
-      #main-bottom {
-        overflow: hidden;
-
-        h2 {
-          font-size: 18px;
-          line-height: 22px;
-          font-weight: 600;
-        }
-        .inner {
-          margin: (@halfSpace);
-        }
-        .front-page-pod {
-          margin-bottom: -999px;    // Equal height
-          padding-bottom: 999px;
-        }
-      }
     }
   }
-
 }
-
-
-
-// Fix:
-// Need to fix for responsive
 
 #block-search-form {
   display: none;    // For now...

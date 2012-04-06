@@ -248,15 +248,6 @@ function brochure_basic_user_default_permissions() {
     'module' => 'image',
   );
 
-  // Exported permission: administer less
-  $permissions['administer less'] = array(
-    'name' => 'administer less',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'less',
-  );
-
   // Exported permission: administer menu
   $permissions['administer menu'] = array(
     'name' => 'administer menu',

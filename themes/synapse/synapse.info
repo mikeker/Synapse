@@ -1,24 +1,7 @@
 name = Synapse
-description = A custom, responsive theme for the SynpaseLearningSolutions.com site based on the Framework theme and Twitter's Boostrap.
+description = Custom theme for SynapseLearningSolutions.com based on the Framework base theme.
 core = 7.x
 engine = phptemplate
-# stylesheets[all][] = css/bootstrap.css
-# stylesheets[all][] = css/bootstrap.min.css
-# stylesheets[all][] = css/bootstrap-responsive.css
-# stylesheets[all][] = css/bootstrap-responsive.min.css
-
-stylesheets[all][] = bootstrap/bootstrap.less
-stylesheets[all][] = bootstrap/responsive.less
-stylesheets[all][] = css/synapse.css.less
-
-regions[header]         = Header
-regions[navigation]     = Navigation
-regions[highlighted]    = Highlighted
-regions[help]           = Help
-regions[content]        = Content
-regions[sidebar_first]  = First Sidebar
-regions[sidebar_second] = Second Sidebar
-regions[footer]         = Footer
-regions[main_bottom_left]    = Bottom main content left
-regions[main_bottom_middle]  = Bottom main content middle
-regions[main_bottom_right]   = Bottom main content right
+base theme = framework
+stylesheets[all][] = synapse.scss
+scripts[] = synapse.js

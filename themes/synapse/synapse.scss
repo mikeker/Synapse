@@ -1,0 +1,173 @@
+/*
+ * Synapse theme main stylesheet.
+ *
+ *  Index
+ *  -----------
+ *  1. General Sitewide Styles
+ *    -- Layout
+ *    -- General Styles
+ *    -- Typography
+ *    -- Links
+ *    -- Header
+ *    -- Nav bar
+ *    -- Sidebars
+ *    -- Footer
+ *  2. Front Page
+ *  3. Inner Pages
+ *  4. Forms
+ *
+ */
+@import "compass/css3";
+
+/*         General Sitewide Styles
+ *************************************************/
+
+  /* Variables */
+$gradientLight    = #fffcf7;
+$gradientDark     = #feddaa;
+$primary          = #FAA21B;
+$primaryDark      = darken($primary, 10%);
+$secondary        = #00AEEF;
+$secondaryDark    = darken($secondary, 10%);
+$white            = #ffffff;
+$black            = #222222;
+
+  /* Layout */
+$space            = 24px;
+$halfSpace        = ($space / 2);
+
+#container {
+  // Always keep the page full-width so we can do full-width horrizontal backgrounds
+  // NOTE: this means we need to limit the various "inner" divs' width.
+  width: auto;
+  margin: 0;
+  padding: 0;
+
+  @media screen and (min-width: 780px) {
+    .inner {
+      width: 780px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (min-width: 960px) {
+    .inner {
+      width: 960px;
+    }
+  }
+}
+
+
+.media-image-right {
+  margin: $halfSpace 0 $halfSpace $halfSpace;
+}
+.media-image-left {
+  margin: $halfSpace $halfSpace $halfSpace 0;
+}
+
+  /* General Styles (Colors, Backgrounds etc.)*/
+$textColor        = #333;
+body {
+  background-color: $gradientDark;
+  padding: 0;
+}
+
+  /* Typography */
+$standardFont     = 'Ubuntu', sans-serif;
+$headingsFont     = 'Exo', sans-serif;
+body {
+  font-family: $standardFont;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $headingsFont;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
+  }
+}
+
+  /* Links */
+$linkColor        = $secondaryDark;
+$linkColorHover   = darken($linkColor, 15%);
+a {
+  color: $linkColor;
+  &:visited, &:link, &:active { color: $linkColor; }
+  &:hover   {
+    color: $linkColorHover;
+    text-decoration: underline;
+  }
+}
+
+  /* Header */
+#header {
+  @media screen and (min-width: 780px) {
+    // Show full header images, gradients, etc.
+    @include background-image(linear-gradient($gradientDark, $gradientLight));
+  }
+}
+
+  /* Nav bar */
+#navigation {
+  font-style: italic;
+  font-weight: 600;
+  background-color: $secondary;
+
+  @media screen and (min-width: 780px) {
+    // Show full header images, gradients, etc.
+    @include background-image(linear-gradient($secondary, darken($secondary, 10%)));
+  }
+
+  a {
+    display: inline-block;
+    color: $white;
+    &:visited, &:link, &:active { color: $white; }
+    &:hover {
+      color: $primary;
+      text-decoration: none;
+    }
+  }
+}
+
+  /* Sidebars */
+
+  /* Footer */
+#footer {
+  text-align: center;
+  font-size: .85em;
+}
+
+
+/*         Front Page
+ *************************************************/
+.front {
+  #main-container-inner {
+    #main-bottom {
+      h2 {
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+      }
+      .front-page-pod {
+        background-color: @white;
+      }
+    }
+  }
+}
+
+/*         Inner Pages
+ *************************************************/
+#main {
+  display: block;
+  margin: 0;
+  padding-top: $space;
+  @media screen and (min-width: 780px) {
+    // Show full header images, gradients, etc.
+    @include background-image(linear-gradient($gradientLight, $gradientDark));
+  }
+  h1.title {
+    // Move vertical rhythm margin to the bottom for the page title
+    margin-top: 0; margin-bottom: .75em;
+  }
+}
+
+/*         Forms
+ *************************************************/
+

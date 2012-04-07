@@ -158,15 +158,6 @@ function brochure_basic_user_default_permissions() {
     'module' => 'media_internet',
   );
 
-  // Exported permission: administer @font-your-face
-  $permissions['administer @font-your-face'] = array(
-    'name' => 'administer @font-your-face',
-    'roles' => array(
-      0 => 'administrator',
-    ),
-    'module' => 'fontyourface',
-  );
-
   // Exported permission: administer actions
   $permissions['administer actions'] = array(
     'name' => 'administer actions',

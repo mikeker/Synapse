@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php
+  // Hack to remove some Framework-based styling from the mix.
+  // @TODO: rebuild without using the base theme, instead use a cleaned out
+  //        version of Framework.
+  $classes_array = explode(' ', $classes);
+  $new_classes = array();
+  foreach ($classes_array as $index => $class) {
+    if (FALSE === strpos($class, 'sidebar')) {
+      $new_classes[] = $class;
+    }
+  }
+  $classes = implode(' ', $new_classes);
+?><!DOCTYPE html>
 <!--[if lt IE 7]> <html class="ie6 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
 <!--[if IE 7]>    <html class="ie7 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->
 <!--[if IE 8]>    <html class="ie8 ie" lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>"> <![endif]-->

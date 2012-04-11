@@ -5,3 +5,15 @@ engine = phptemplate
 base theme = framework
 stylesheets[all][] = synapse.scss
 scripts[] = synapse.js
+
+regions[header]               = Header
+regions[navigation]           = Navigation
+regions[highlighted]          = Highlighted
+regions[help]                 = Help
+regions[content]              = Content
+regions[sidebar_first]        = First Sidebar
+regions[sidebar_second]       = Second Sidebar
+regions[footer]               = Footer
+regions[main_bottom_left]     = Bottom main content left
+regions[main_bottom_middle]   = Bottom main content middle
+regions[main_bottom_right]    = Bottom main content right

@@ -1,0 +1,43 @@
+$column_width: 60px !default;
+$column_num: 12 !default;
+$gutter_width: 20px !default;
+
+@mixin grid-container($n) {
+  margin-left: auto;
+  margin-right: auto;
+  width: ($column_width + $gutter_width) * $n - $gutter_width;
+}
+
+@mixin grid($n) {
+  display: block;
+  float: left;
+  position: relative;
+  margin-left: $gutter_width / 2;
+  margin-right: $gutter_width / 2;
+  width: ($column_width + $gutter_width) * $n - $gutter_width;
+}
+
+@mixin push($n) {
+  position: relative;
+  left: ($column_width + $gutter_width) * $n;
+}
+
+@mixin pull($n) {
+  left: -($column_width + $gutter_width) * $n;
+}
+
+@mixin prefix($n) {
+  padding-left: ($column_width + $gutter_width) * $n;
+}
+
+@mixin suffix($n) {
+  padding-right: ($column_width + $gutter_width) * $n;
+}
+
+@mixin alpha {
+  margin-left: 0;
+}
+
+@mixin omega {
+  margin-right: 0;
+}

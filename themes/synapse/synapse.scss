@@ -18,6 +18,7 @@
  *
  */
 @import "compass/css3";
+@import "grid";
 
 /*         General Sitewide Styles
  *************************************************/
@@ -98,9 +99,35 @@ a {
 
   /* Header */
 #header {
+  @media screen and (max-width: 779px) {
+    // @TODO: fix this so we don't download the image
+    #logo {
+      display: none;
+    }
+    #site-name-slogan {
+      text-align: center;
+    }
+  }
+
   @media screen and (min-width: 780px) {
     // Show full header images, gradients, etc.
     @include background-image(linear-gradient($gradientDark, $gradientLight));
+
+    .inner {
+      // background: url("/sites/synapselearningsolutions.com/themes/synapse/images/header_bg.png") top right no-repeat;
+    }
+
+    #site-name-slogan {
+      float: right;
+      text-align: center;
+      padding: $halfSpace $space;
+      background-color: $primary;
+      margin-top: (2 * $space);
+      // Hide site name since we have that in the logo
+      #site-name {
+        display: none;
+      }
+    }
   }
 }
 
@@ -110,9 +137,29 @@ a {
   font-weight: 600;
   background-color: $secondary;
 
+  section {
+    margin: 0;
+  }
+  li {
+    padding-right: $space;
+    &.last {
+      padding-right: 0;
+    }
+    li {
+      // No padding needed for second level items
+      padding-right: 0;
+    }
+  }
+
   @media screen and (min-width: 780px) {
     // Show full header images, gradients, etc.
     @include background-image(linear-gradient($secondary, darken($secondary, 10%)));
+    li {
+      padding-right: (2 * $space);
+      &.last {
+        padding-right: 0;
+      }
+    }
   }
 
   a {
@@ -124,6 +171,56 @@ a {
       text-decoration: none;
     }
   }
+
+  // Overrides of Nice Menu's default styling
+  ul.nice-menu,
+  ul.nice-menu ul {
+    border-top: none;
+  }
+
+  ul.nice-menu li {
+    border: none;
+    background-color: transparent;
+  }
+
+  ul.nice-menu a {
+    padding: 0.3em 5px 0.3em 5px;
+  }
+
+  ul.nice-menu ul {
+    border: 1px solid $primary;
+    background-color: darken($secondary, 10%)
+  }
+
+  ul.nice-menu ul li {
+    width: 15em;
+  }
+
+  ul.nice-menu-down li {
+    border-top: none;
+  }
+
+  /******************************
+   HORIZONTAL (down) menus
+  ******************************/
+
+  ul.nice-menu-down li.menuparent {
+    background: transparent url(arrow-down.png) right center no-repeat; /* LTR */
+  }
+
+  ul.nice-menu-down li.menuparent:hover {
+    background: transparent url(arrow-down.png) right center no-repeat; /* LTR */
+  }
+
+  ul.nice-menu-down li li.menuparent {
+    background: transparent url(arrow-right.png) right center no-repeat; /* LTR */
+  }
+
+  ul.nice-menu-down li li.menuparent:hover {
+    background: transparent url(arrow-right.png) right center no-repeat; /* LTR */
+  }
+
+
 }
 
   /* Sidebars */
@@ -134,37 +231,164 @@ a {
   font-size: .85em;
 }
 
+/*         General page layout
+ *************************************************/
+/*
+ * Note since we're using full-width elements, such as the nav bar background,
+ * we can't use the usual 960 grid where you simply wrap container with grid(12).
+ * Instead we have the sidebars within the main content area and use that as
+ * our grid container.
+ *
+ * Set that up here for mobile first (one-col, fluid), then desktop
+ */
+#main-inner {
+  @media screen and (max-width: 719px) {
+    // One column, full-width, fluid
+    width 100%;
+    margin-left: $halfSpace;
+    margin-right: $halfSpace;
+    #sidebar-second {
+      background-color: $white;
+      h2, .content {
+        padding-left: $halfSpace;
+        padding-right: $halfSpace;
+      }
+    }
+  }
+  @media screen and (min-width: 720px) {
+    // One column, fixed width at 720px
+    @include grid-container(9);
+    > .content {
+      @include grid(9);
+      @include alpha;
+      @include omega;
+    }
+    #sidebar-second {
+      @include grid(9);
+      @include alpha;
+      @include omega;
+      @include pull(9);   // Puts sidebar ahead of main content
+
+      background-color: $white;
+      h2, .content {
+        padding-left: $halfSpace;
+        padding-right: $halfSpace;
+      }
+    }
+  }
+  @media screen and (min-width: 960px) {
+    // Overrides of the 780 layout to make it two columns, fixed width at 960px
+    @include grid-container(12);
+    > .content {
+      @include grid(9);
+      @include alpha;
+    }
+    #sidebar-second {
+      @include grid(3);
+      @include omega;
+      @include pull(0);     // Undo pull(9) from above
+    }
+  }
+}
+
+
 
 /*         Front Page
  *************************************************/
 .front {
-  #main-container-inner {
-    #main-bottom {
-      h2 {
-        font-size: 18px;
-        line-height: 22px;
-        font-weight: 600;
-      }
-      .front-page-pod {
-        background-color: @white;
+  #main-inner {
+    @media screen and (min-width: 960px) {
+      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 52px no-repeat;
+
+      // Use main inner as the whole page wrapper so we can better push content
+      // around on the front page.
+      @include grid-container(12);
+      #block-views-slideshow-block {
+        @include grid(9);
+        @include alpha;
       }
     }
+  }
+  #main-bottom {
+    @media screen and (min-width: 780px) {
+      @include grid(9);
+      @include alpha;
+      @include omega;
+      overflow: hidden;
+
+      #main-bottom-left, #main-bottom-middle, #main-bottom-right {
+        background-color: $white;
+        @include grid(3);
+        margin-bottom: -999px;    // Equal height
+        padding-bottom: 999px;
+      }
+      #main-bottom-right {
+        @include omega;
+      }
+      #main-bottom-left {
+        @include alpha;
+      }
+    }
+
+    h2, .content {
+      padding-left: $halfSpace;
+      padding-right: $halfSpace;
+    }
+
+    h2 {
+      font-size: 18px;
+      line-height: 22px;
+      font-weight: 600;
+      margin-bottom: $space + 2;  // Maintain 24px vertical rhythm
+    }
+  }
+}
+
+  /* Slideshows */
+.slideshow-slide {
+  position: relative;
+
+  .slideshow-slide-caption {
+    position: absolute;
+    font-size: 24px;
+    line-height: 36px;
+  }
+  .sideshow-caption-color-black {
+    color: $black;
+    @include text-shadow(rgba($white, 0.6), 1px 1px 3px);
+  }
+  .sideshow-caption-color-white {
+    color: $white;
+    @include text-shadow(rgba($black, 0.6), 1px 1px 3px);
+  }
+  .slideshow-caption-location-ul {
+    top: $space; left: $space;
+    text-align: left;
+  }
+  .slideshow-caption-location-ur {
+    top: $space; right: $space;
+    text-align: right;
+  }
+  .slideshow-caption-location-lr {
+    bottom: $space; right: $space;
+    text-align: right;
+  }
+  .slideshow-caption-location-ll {
+    bottom: $space; left: $space;
+    text-align: left;
   }
 }
 
 /*         Inner Pages
  *************************************************/
 #main {
-  display: block;
-  margin: 0;
-  padding-top: $space;
   @media screen and (min-width: 780px) {
     // Show full header images, gradients, etc.
     @include background-image(linear-gradient($gradientLight, $gradientDark));
   }
   h1.title {
     // Move vertical rhythm margin to the bottom for the page title
-    margin-top: 0; margin-bottom: .75em;
+    // margin-top: 0; margin-bottom: .75em;
   }
 }
 

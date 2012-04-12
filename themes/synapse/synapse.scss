@@ -43,21 +43,7 @@ $halfSpace        = ($space / 2);
   width: auto;
   margin: 0;
   padding: 0;
-
-  @media screen and (min-width: 780px) {
-    .inner {
-      width: 780px;
-      margin: 0 auto;
-    }
-  }
-
-  @media screen and (min-width: 960px) {
-    .inner {
-      width: 960px;
-    }
-  }
 }
-
 
 .media-image-right {
   margin: $halfSpace 0 $halfSpace $halfSpace;
@@ -112,10 +98,6 @@ a {
   @media screen and (min-width: 780px) {
     // Show full header images, gradients, etc.
     @include background-image(linear-gradient($gradientDark, $gradientLight));
-
-    .inner {
-      // background: url("/sites/synapselearningsolutions.com/themes/synapse/images/header_bg.png") top right no-repeat;
-    }
 
     #site-name-slogan {
       float: right;
@@ -224,6 +206,20 @@ a {
 }
 
   /* Sidebars */
+#sidebar-second, #main-bottom > div {
+  background-color: $white;
+  h2 {
+    margin-top: $halfSpace;
+    margin-bottom: $halfSpace;
+    padding-left: $halfSpace;
+    padding-right: $halfSpace;
+  }
+  .content {
+    // font-size: .9em;
+    padding-left: $halfSpace;
+    padding-right: $halfSpace;
+  }
+}
 
   /* Footer */
 #footer {
@@ -241,21 +237,14 @@ a {
  *
  * Set that up here for mobile first (one-col, fluid), then desktop
  */
-#main-inner {
-  @media screen and (max-width: 719px) {
-    // One column, full-width, fluid
-    width 100%;
-    margin-left: $halfSpace;
-    margin-right: $halfSpace;
-    #sidebar-second {
-      background-color: $white;
-      h2, .content {
-        padding-left: $halfSpace;
-        padding-right: $halfSpace;
-      }
-    }
-  }
-  @media screen and (min-width: 720px) {
+@media screen and (max-width: 719px) {
+  // One column, full-width, fluid
+  width 100%;
+  margin-left: $halfSpace;
+  margin-right: $halfSpace;
+}
+@media screen and (min-width: 720px) {
+  .inner {
     // One column, fixed width at 720px
     @include grid-container(9);
     > .content {
@@ -263,46 +252,43 @@ a {
       @include alpha;
       @include omega;
     }
-    #sidebar-second {
-      @include grid(9);
-      @include alpha;
-      @include omega;
-      @include pull(9);   // Puts sidebar ahead of main content
-
-      background-color: $white;
-      h2, .content {
-        padding-left: $halfSpace;
-        padding-right: $halfSpace;
-      }
-    }
   }
-  @media screen and (min-width: 960px) {
-    // Overrides of the 780 layout to make it two columns, fixed width at 960px
+  #sidebar-second {
+    @include grid(9);
+    @include alpha;
+    @include omega;
+    margin-bottom: $space;
+    background-color: $white;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  // Overrides of the 780 layout to make it two columns, fixed width at 960px
+  .inner {
     @include grid-container(12);
     > .content {
       @include grid(9);
       @include alpha;
     }
-    #sidebar-second {
-      @include grid(3);
-      @include omega;
-      @include pull(0);     // Undo pull(9) from above
-    }
+  }
+  #sidebar-second {
+    @include grid(3);
+    @include omega;
+    float: right;
   }
 }
-
-
 
 /*         Front Page
  *************************************************/
 .front {
   #main-inner {
     @media screen and (min-width: 960px) {
-      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 52px no-repeat;
-
-      // Use main inner as the whole page wrapper so we can better push content
-      // around on the front page.
+      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 70px no-repeat;
       @include grid-container(12);
+
+      #main-bottom {
+        margin-top: 2 * $space;
+      }
       #block-views-slideshow-block {
         @include grid(9);
         @include alpha;
@@ -329,17 +315,21 @@ a {
         @include alpha;
       }
     }
-
-    h2, .content {
-      padding-left: $halfSpace;
-      padding-right: $halfSpace;
-    }
-
     h2 {
       font-size: 18px;
       line-height: 22px;
       font-weight: 600;
       margin-bottom: $space + 2;  // Maintain 24px vertical rhythm
+    }
+  }
+}
+
+// Handle background image for logged in viewers...  Everything is pushed down
+// by the secondary menus.
+.front.logged-in {
+  #main-inner {
+    @media screen and (min-width: 960px) {
+      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 100px no-repeat;
     }
   }
 }

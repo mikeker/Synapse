@@ -134,6 +134,136 @@ function brochure_slideshow_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
+        'weight' => '2',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-slideshow_image-field_slideshow_color'
+  $fields['node-slideshow_image-field_slideshow_color'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_slideshow_color',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'black' => 'Black',
+          'white' => 'White',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'slideshow_image',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 5,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_slideshow_color',
+      'label' => 'Text color',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-slideshow_image-field_slideshow_enabled'
+  $fields['node-slideshow_image-field_slideshow_enabled'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_slideshow_enabled',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'slideshow_image',
+      'default_value' => array(
+        0 => array(
+          'value' => 1,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'If checked, this image will be used in the front page slideshow. Uncheck this option if you want to remove images from the slideshow without deleting the image, caption, etc.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 4,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_slideshow_enabled',
+      'label' => 'Enabled',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
         'weight' => '1',
       ),
     ),
@@ -160,14 +290,13 @@ function brochure_slideshow_field_default_fields() {
           0 => 'fid',
         ),
       ),
-      'module' => 'file',
+      'module' => 'image',
       'settings' => array(
-        'display_default' => 0,
-        'display_field' => 0,
+        'default_image' => 0,
         'uri_scheme' => 'public',
       ),
       'translatable' => '0',
-      'type' => 'file',
+      'type' => 'image',
     ),
     'field_instance' => array(
       'bundle' => 'slideshow_image',
@@ -175,13 +304,14 @@ function brochure_slideshow_field_default_fields() {
       'description' => '',
       'display' => array(
         'default' => array(
-          'label' => 'hidden',
-          'module' => 'file_entity',
+          'label' => 'above',
+          'module' => 'image',
           'settings' => array(
-            'file_view_mode' => 'default',
+            'image_link' => '',
+            'image_style' => '',
           ),
-          'type' => 'file_rendered',
-          'weight' => '0',
+          'type' => 'image',
+          'weight' => 3,
         ),
         'teaser' => array(
           'label' => 'above',
@@ -192,13 +322,16 @@ function brochure_slideshow_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_slideshow_image',
-      'label' => 'Image',
+      'label' => 'Slideshow image',
       'required' => 0,
       'settings' => array(
-        'description_field' => 0,
+        'alt_field' => 0,
         'file_directory' => 'slideshow',
-        'file_extensions' => 'jpg jpeg png gif',
+        'file_extensions' => 'png gif jpg jpeg',
         'max_filesize' => '',
+        'max_resolution' => '',
+        'min_resolution' => '',
+        'title_field' => 0,
         'user_register_form' => FALSE,
       ),
       'widget' => array(
@@ -206,25 +339,82 @@ function brochure_slideshow_field_default_fields() {
         'module' => 'media',
         'settings' => array(
           'allowed_schemes' => array(
-            'public' => 'public',
-            'youtube' => 0,
+            0 => 'public',
+            1 => 'private',
           ),
           'allowed_types' => array(
-            'audio' => 0,
-            'default' => 0,
-            'image' => 'image',
-            'video' => 0,
+            0 => 'image',
           ),
-          'browser_plugins' => array(
-            'library' => 0,
-            'media_default--media_browser_1' => 0,
-            'media_internet' => 0,
-            'upload' => 0,
-          ),
+          'browser_plugins' => array(),
+          'preview_image_style' => 'thumbnail',
           'progress_indicator' => 'throbber',
         ),
         'type' => 'media_generic',
-        'weight' => '3',
+        'weight' => '6',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-slideshow_image-field_slideshow_location'
+  $fields['node-slideshow_image-field_slideshow_location'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_slideshow_location',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'ul' => 'Upper Left',
+          'ur' => 'Upper Right',
+          'll' => 'Lower Left',
+          'lr' => 'Lower Right',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'slideshow_image',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 6,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_slideshow_location',
+      'label' => 'Text location',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '4',
       ),
     ),
   );
@@ -307,10 +497,14 @@ function brochure_slideshow_field_default_fields() {
       ),
       'widget' => array(
         'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
-        'weight' => '2',
+        'module' => 'entityreference',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'path' => '',
+          'size' => 60,
+        ),
+        'type' => 'entityreference_autocomplete',
+        'weight' => '5',
       ),
     ),
   );
@@ -320,7 +514,11 @@ function brochure_slideshow_field_default_fields() {
   t('Caption');
   t('Comment');
   t('Destination');
-  t('Image');
+  t('Enabled');
+  t('If checked, this image will be used in the front page slideshow. Uncheck this option if you want to remove images from the slideshow without deleting the image, caption, etc.');
+  t('Slideshow image');
+  t('Text color');
+  t('Text location');
   t('Text that will display along with the image. You can force line breaks by adding <i>&lt;br /&gt;</i> to the text.');
 
   return $fields;

@@ -322,6 +322,46 @@ a {
       margin-bottom: $space + 2;  // Maintain 24px vertical rhythm
     }
   }
+
+  @media screen and (min-width: 720px) {
+      /* Slideshows */
+    .slideshow-slide {
+      position: relative;
+
+      .slideshow-slide-caption {
+        position: absolute;
+        font-size: 24px;
+        line-height: 36px;
+      }
+      .slideshow-caption-color-black {
+        color: $black;
+        @include text-shadow(rgba($white, 0.7) 1px 1px 3px);
+        // @include text-shadow(rgba($white, 0.6), 1px 1px 3px);
+      }
+      .slideshow-caption-color-white {
+        color: $white;
+        @include text-shadow(rgba($black, 0.7) 1px 1px 3px);
+        // @include text-shadow(rgba($black, 0.6), 1px 1px 3px);
+      }
+      .slideshow-caption-location-ul {
+        top: $space; left: $space;
+        text-align: left;
+      }
+      .slideshow-caption-location-ur {
+        top: $space; right: $space;
+        text-align: right;
+      }
+      .slideshow-caption-location-lr {
+        bottom: $space; right: $space;
+        text-align: right;
+      }
+      .slideshow-caption-location-ll {
+        bottom: $space; left: $space;
+        text-align: left;
+      }
+    }
+  }
+
 }
 
 // Handle background image for logged in viewers...  Everything is pushed down
@@ -334,40 +374,6 @@ a {
   }
 }
 
-  /* Slideshows */
-.slideshow-slide {
-  position: relative;
-
-  .slideshow-slide-caption {
-    position: absolute;
-    font-size: 24px;
-    line-height: 36px;
-  }
-  .sideshow-caption-color-black {
-    color: $black;
-    @include text-shadow(rgba($white, 0.6), 1px 1px 3px);
-  }
-  .sideshow-caption-color-white {
-    color: $white;
-    @include text-shadow(rgba($black, 0.6), 1px 1px 3px);
-  }
-  .slideshow-caption-location-ul {
-    top: $space; left: $space;
-    text-align: left;
-  }
-  .slideshow-caption-location-ur {
-    top: $space; right: $space;
-    text-align: right;
-  }
-  .slideshow-caption-location-lr {
-    bottom: $space; right: $space;
-    text-align: right;
-  }
-  .slideshow-caption-location-ll {
-    bottom: $space; left: $space;
-    text-align: left;
-  }
-}
 
 /*         Inner Pages
  *************************************************/

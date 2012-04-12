@@ -244,10 +244,13 @@ function brochure_slideshow_views_default_views() {
 $location = \'slideshow-caption-location-\' . $data->field_field_slideshow_location[0][\'raw\'][\'value\'];
 $color = \'slideshow-caption-color-\' . $data->field_field_slideshow_color[0][\'raw\'][\'value\'];
 $image = $data->field_field_slideshow_image[0][\'rendered\'];
-$nid = $data->field_field_slideshow_reference[0][\'raw\'][\'target_id\'];
+$nid = 0;
+if (!empty($data->field_field_slideshow_reference[0][\'raw\'][\'target_id\'])) {
+  $nid = $data->field_field_slideshow_reference[0][\'raw\'][\'target_id\'];
+}
 ?>
 <div class="slideshow-slide">
-<a href="<?php print url("node/$nid"); ?>">
+<?php if ($nid) { print \'<a href="$nid">\'; } ?>
   <?php print theme($image[\'#theme\'], array(
       \'path\' => $image[\'#path\'],
       \'item\' => $image[\'#item\'],
@@ -255,7 +258,7 @@ $nid = $data->field_field_slideshow_reference[0][\'raw\'][\'target_id\'];
       \'max_style\' => $image[\'#max_style\'],
       \'fallback_style\' => $image[\'#fallback_style\'],
     )); ?>
-</a>
+<?php if ($nid) { print \'</a>\'; } ?>
 <div class="slideshow-slide-caption  <?php print $location . \' \' . $color?>">
   <?php print $data->field_field_slideshow_caption[0][\'raw\'][\'value\']; ?>
 </div>

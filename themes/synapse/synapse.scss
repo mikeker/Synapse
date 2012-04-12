@@ -266,10 +266,10 @@ a {
   // Overrides of the 780 layout to make it two columns, fixed width at 960px
   .inner {
     @include grid-container(12);
-    > .content {
-      @include grid(9);
-      @include alpha;
-    }
+  }
+  .inner > .content {
+    @include grid(9);
+    @include alpha;
   }
   #sidebar-second {
     @include grid(3);

@@ -44,16 +44,19 @@ $halfSpace        = ($space / 2);
   margin: 0;
   padding: 0;
 }
-
 .media-image-right {
   margin: $halfSpace 0 $halfSpace $halfSpace;
 }
 .media-image-left {
   margin: $halfSpace $halfSpace $halfSpace 0;
 }
+#main {
+  display: block;
+}
 
   /* General Styles (Colors, Backgrounds etc.)*/
-$textColor        = #333;
+// $textColor        = #333;
+$textColor        = darken($secondary, 25%);
 body {
   background-color: $gradientDark;
   padding: 0;
@@ -61,8 +64,9 @@ body {
 
   /* Typography */
 $standardFont     = 'Ubuntu', sans-serif;
-$headingsFont     = 'Exo', sans-serif;
+$headingsFont     = 'Ubuntu', sans-serif;
 body {
+  color: $textColor;
   font-family: $standardFont;
   h1, h2, h3, h4, h5, h6 {
     font-family: $headingsFont;
@@ -72,8 +76,8 @@ body {
 }
 
   /* Links */
-$linkColor        = $secondaryDark;
-$linkColorHover   = darken($linkColor, 15%);
+$linkColor        = darken($primaryDark, 15%);
+$linkColorHover   = darken($linkColor, 5%);
 a {
   color: $linkColor;
   &:visited, &:link, &:active { color: $linkColor; }
@@ -223,6 +227,8 @@ a {
 
   /* Footer */
 #footer {
+  margin: $space 0;
+  border-top: $space solid $primaryDark;
   text-align: center;
   font-size: .85em;
 }
@@ -283,7 +289,7 @@ a {
 .front {
   #main-inner {
     @media screen and (min-width: 960px) {
-      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 70px no-repeat;
+      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 95px no-repeat;
       @include grid-container(12);
 
       #main-bottom {
@@ -369,7 +375,7 @@ a {
 .front.logged-in {
   #main-inner {
     @media screen and (min-width: 960px) {
-      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 100px no-repeat;
+      background: url('/sites/synapselearningsolutions.com/themes/synapse/images/dot_bg.png') 53px 143px no-repeat;
     }
   }
 }
@@ -383,8 +389,8 @@ a {
     @include background-image(linear-gradient($gradientLight, $gradientDark));
   }
   h1.title {
-    // Move vertical rhythm margin to the bottom for the page title
-    // margin-top: 0; margin-bottom: .75em;
+    // Move vertical rhythm to padding so it doesn't screw up backgrounds.
+    margin-top: 0; padding-top: .75em;
   }
 }
 

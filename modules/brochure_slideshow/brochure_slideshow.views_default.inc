@@ -138,6 +138,7 @@ function brochure_slideshow_views_default_views() {
   $handler->display->display_options['fields']['field_slideshow_image']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['field_slideshow_image']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['field_slideshow_image']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_slideshow_image']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['field_slideshow_image']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['field_slideshow_image']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['field_slideshow_image']['alter']['html'] = 0;
@@ -154,7 +155,7 @@ function brochure_slideshow_views_default_views() {
     'custom_label' => 0,
     'label' => '',
     'element_label_colon' => 0,
-    'exclude' => 0,
+    'exclude' => 1,
     'element_type_enable' => 0,
     'element_type' => '',
     'element_class_enable' => 0,
@@ -187,6 +188,9 @@ function brochure_slideshow_views_default_views() {
       'max_length' => '',
       'word_boundary' => 1,
       'ellipsis' => 1,
+      'more_link' => 0,
+      'more_link_text' => '',
+      'more_link_path' => '',
       'html' => 0,
       'strip_tags' => 0,
       'preserve_tags' => '',
@@ -231,6 +235,7 @@ function brochure_slideshow_views_default_views() {
   $handler->display->display_options['fields']['php']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['php']['alter']['word_boundary'] = 1;
   $handler->display->display_options['fields']['php']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['php']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['php']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['php']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['php']['alter']['html'] = 0;
@@ -239,30 +244,11 @@ function brochure_slideshow_views_default_views() {
   $handler->display->display_options['fields']['php']['hide_empty'] = 0;
   $handler->display->display_options['fields']['php']['empty_zero'] = 0;
   $handler->display->display_options['fields']['php']['hide_alter_empty'] = 1;
-  $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php']['use_php_setup'] = 1;
+  $handler->display->display_options['fields']['php']['php_setup'] = 'require_once (drupal_get_path(\'theme\', \'synapse\') . \'/template.php\');';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php
-$location = \'slideshow-caption-location-\' . $data->field_field_slideshow_location[0][\'raw\'][\'value\'];
-$color = \'slideshow-caption-color-\' . $data->field_field_slideshow_color[0][\'raw\'][\'value\'];
-$image = $data->field_field_slideshow_image[0][\'rendered\'];
-$nid = 0;
-if (!empty($data->field_field_slideshow_reference[0][\'raw\'][\'target_id\'])) {
-  $nid = $data->field_field_slideshow_reference[0][\'raw\'][\'target_id\'];
-}
-?>
-<div class="slideshow-slide">
-<?php if ($nid) { print \'<a href="$nid">\'; } ?>
-  <?php print theme($image[\'#theme\'], array(
-      \'path\' => $image[\'#path\'],
-      \'item\' => $image[\'#item\'],
-      \'breakpoint_styles\' => $image[\'#breakpoint_styles\'],
-      \'max_style\' => $image[\'#max_style\'],
-      \'fallback_style\' => $image[\'#fallback_style\'],
-    )); ?>
-<?php if ($nid) { print \'</a>\'; } ?>
-<div class="slideshow-slide-caption  <?php print $location . \' \' . $color?>">
-  <?php print $data->field_field_slideshow_caption[0][\'raw\'][\'value\']; ?>
-</div>
-</div>';
+  print synapse_format_slideshow($data);
+?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php']['php_click_sortable'] = '';
   /* Field: Content: Text color */

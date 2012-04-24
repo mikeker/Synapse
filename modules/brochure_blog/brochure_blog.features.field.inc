@@ -199,12 +199,8 @@ function brochure_blog_field_default_fields() {
         ),
         'teaser' => array(
           'label' => 'hidden',
-          'module' => 'image',
-          'settings' => array(
-            'image_link' => 'content',
-            'image_style' => 'medium',
-          ),
-          'type' => 'image',
+          'settings' => array(),
+          'type' => 'hidden',
           'weight' => '-1',
         ),
       ),
@@ -282,10 +278,9 @@ function brochure_blog_field_default_fields() {
           'weight' => '10',
         ),
         'teaser' => array(
-          'label' => 'inline',
-          'module' => 'taxonomy',
+          'label' => 'hidden',
           'settings' => array(),
-          'type' => 'taxonomy_term_reference_link',
+          'type' => 'hidden',
           'weight' => '10',
         ),
       ),

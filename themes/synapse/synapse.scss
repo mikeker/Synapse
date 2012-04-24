@@ -46,9 +46,11 @@ $halfSpace        = ($space / 2);
 }
 .media-image-right {
   margin: $halfSpace 0 $halfSpace $halfSpace;
+  float: right;
 }
 .media-image-left {
   margin: $halfSpace $halfSpace $halfSpace 0;
+  float: left;
 }
 #main {
   display: block;
@@ -223,6 +225,11 @@ a {
     padding-left: $halfSpace;
     padding-right: $halfSpace;
   }
+  .content .content, .content h2 {
+    // Except for Views blocks where the <h2> element is within the .content <div>
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
   /* Footer */
@@ -391,6 +398,12 @@ a {
   h1.title {
     // Move vertical rhythm to padding so it doesn't screw up backgrounds.
     margin-top: 0; padding-top: .75em;
+  }
+  
+  .view-blog-entries {
+    .views-row {
+      clear: both;
+    }
   }
 }
 

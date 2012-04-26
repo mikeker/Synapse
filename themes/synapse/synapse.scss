@@ -44,7 +44,7 @@ $halfSpace        = ($space / 2);
   margin: 0;
   padding: 0;
 }
-.media-image-right {
+.field-name-field-image, .media-image-right {
   margin: $halfSpace 0 $halfSpace $halfSpace;
   float: right;
 }
@@ -280,7 +280,7 @@ a {
   .inner {
     @include grid-container(12);
   }
-  .inner > .content {
+  .inner > .content, #comments {
     @include grid(9);
     @include alpha;
   }
@@ -406,6 +406,22 @@ a {
     }
   }
 }
+
+.service-links {
+  margin: $space 0;
+  
+  .service-label {
+    font-weight: bold;
+  }
+  ul.links {
+    list-style: none;
+    li {
+      float: left;
+      margin-right: $space;
+    }
+  }
+}
+
 
 /*         Forms
  *************************************************/

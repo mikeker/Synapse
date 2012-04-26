@@ -269,21 +269,21 @@ function brochure_basic_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'service_links_in_links';
-  $strongarm->value = '3';
+  $strongarm->value = '0';
   $export['service_links_in_links'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'service_links_in_node';
-  $strongarm->value = '0';
+  $strongarm->value = '2';
   $export['service_links_in_node'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'service_links_label_in_node';
-  $strongarm->value = 'Bookmark/Search this post with';
+  $strongarm->value = 'Share this post';
   $export['service_links_label_in_node'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -300,6 +300,7 @@ function brochure_basic_strongarm() {
   $strongarm->value = array(
     'article' => 'article',
     'page' => 0,
+    'slideshow_image' => 0,
   );
   $export['service_links_node_types'] = $strongarm;
 
@@ -335,7 +336,7 @@ function brochure_basic_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'service_links_short_links_use';
-  $strongarm->value = '0';
+  $strongarm->value = '1';
   $export['service_links_short_links_use'] = $strongarm;
 
   $strongarm = new stdClass();
